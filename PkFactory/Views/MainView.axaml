@@ -13,7 +13,7 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="300" Margin="5">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
         <TextBlock FontSize="20" Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Margin="5" />
         <!-- <Button HorizontalAlignment="Center"  Command="{Binding GetPreppedFileCommand}" Content="Load" Margin="5" /> -->
