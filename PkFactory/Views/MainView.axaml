@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PkFactory.ViewModels"
+             xmlns:sevices="clr-namespace:PkFactory.Services"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PkFactory.Views.MainView"
+             sevices:DialogManager.Register="{Binding}"
+             x:DataType="vm:MainViewModel">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" MaxWidth="300" Margin="5">
+        <TextBlock FontSize="20" Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Margin="5" />
+        <!-- <Button HorizontalAlignment="Center"  Command="{Binding GetPreppedFileCommand}" Content="Load" Margin="5" /> -->
+        <TextBox HorizontalAlignment="Left" MinWidth="100" Watermark="Name" Text="{Binding Name, Mode=TwoWay}"
+                 Margin="5" />
+        <ListBox Background="Transparent"
+                 ItemsSource="{Binding GenderSelects}"
+                 SelectedItem="{Binding SelectedGender}"
+                 Classes="RadioButtonListBox"
+                 Margin="5" />
+        <Button HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" Content="Save" />
+    </StackPanel>
+</UserControl>

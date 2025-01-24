@@ -1,0 +1,34 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:PkFactory"
+             x:Class="PkFactory.App"
+             RequestedThemeVariant="Default">
+    <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+
+        <!--Use Classes="RadioButtonListBox" in any ListBox to represent its items as RadioButtons-->
+        <Style Selector="ListBox.RadioButtonListBox">
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="ListBox.RadioButtonListBox ListBoxItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Background="Transparent">
+                            <RadioButton Content="{TemplateBinding ContentPresenter.Content}"
+                                         VerticalAlignment="Center"
+                                         IsChecked="{TemplateBinding IsSelected,Mode=TwoWay}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Application.Styles>
+
+</Application>
