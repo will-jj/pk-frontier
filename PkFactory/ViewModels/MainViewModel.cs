@@ -24,7 +24,7 @@ public partial class MainViewModel : ViewModelBase
     private string? _filename = "emerald-factory.sav";
 
     [ObservableProperty]
-    private string _greeting = "Create Factory Ready Save";
+    private string _greeting = "Create Emerald Factory Ready Save";
 
     private string _name = string.Empty;
 
