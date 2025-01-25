@@ -12,6 +12,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PkFactory.Services;
 using PKHeX.Core;
+using PkFactory.Models;
 
 namespace PkFactory.ViewModels;
 
@@ -24,7 +25,7 @@ public partial class MainViewModel : ViewModelBase
     private string? _filename = "emerald-factory.sav";
 
     [ObservableProperty]
-    private string _greeting = "Create Emerald Factory Ready Save";
+    private string _greeting = "Create Emerald Frontier Ready Save";
 
     private string _name = string.Empty;
 
@@ -36,6 +37,7 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         SelectedGender = GenderSelects[0];
+        SelectedSet = SetOptions[0];
     }
 
     [Required]
@@ -46,12 +48,26 @@ public partial class MainViewModel : ViewModelBase
         get => _name;
         set => SetProperty(ref _name, value, true);
     }
+    
 
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
+    public ObservableCollection<string> SetOptions { get; set; } = ["Blank", "Adedede Battle Tower Singles Lv. 50"];
+    public ObservableCollection<Set> Sets { get; set; } = new()
+    {
+        new(),
+        new(String.Empty),
+        new Set(String.Empty),
+    };
+
+    [ObservableProperty]
+    private string _selectedSet;
+    
+    [ObservableProperty]
+    private int _selectedSetIndex;
 
     [ObservableProperty]
     private bool _includeTeam;
-
+    
     [RelayCommand]
     public async Task GetPreppedFile()
     {
@@ -127,16 +143,26 @@ public partial class MainViewModel : ViewModelBase
         if(_saveFile is null) return;
 
         int partyCount = 0;
-        foreach (string member in Constants.Sets.AdededeTowerSingles50)
+        foreach (Set member in Sets)
         {
-            ShowdownSet set = new ShowdownSet(member);
-            
+
+            ShowdownSet set = new(member.ShowdownText);
+            if (set.InvalidLines.Count > 0 || set.Species == 0)
+            {
+                member.IsNotValid = true;
+                continue;
+            }
+
+            member.IsNotValid = false;
+
             // can adapt to gen in future based on save
             PKM pkm = new PK3();
             pkm.ApplySetDetails(set);
             if (string.IsNullOrEmpty(set.Nickname))
             {
-                pkm.Nickname = "TEST";
+                pkm.Nickname = SpeciesName.GetSpeciesNameGeneration(pkm.Species,
+                    2, //_saveFile.Language,
+                    _saveFile.Generation);
             }
             
             // Still show as traded but at least give the name
@@ -147,5 +173,29 @@ public partial class MainViewModel : ViewModelBase
             _saveFile.SetPartySlotAtIndex(pkm, partyCount);
             partyCount++;
         }
+    }
+
+    partial void OnSelectedSetChanged(string? oldValue, string newValue)
+    {
+        if (oldValue is null) return;
+        
+        // TODO: make this flexible for any set choice
+        if (SelectedSetIndex == 1)
+        {
+            Sets.Clear();
+            foreach (string setStr in Constants.Sets.AdededeTowerSingles50)
+            {
+                Sets.Add(new(setStr));
+            }
+        }
+        else
+        {
+            Sets.Clear();
+            for (int ii = 0; ii < 3; ii++)
+            {
+                Sets.Add(new());
+            }
+        }
+
     }
 }
