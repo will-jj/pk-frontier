@@ -49,6 +49,9 @@ public partial class MainViewModel : ViewModelBase
 
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
 
+    [ObservableProperty]
+    private bool _includeTeam;
+
     [RelayCommand]
     public async Task GetPreppedFile()
     {
@@ -99,6 +102,12 @@ public partial class MainViewModel : ViewModelBase
         else
             _saveFile.Gender = (byte)Gender.Female;
 
+        if (IncludeTeam)
+        {
+            SetTeam();
+        }
+        
+
         TopLevel? topLevel = DialogManager.GetTopLevelForContext(this);
         if (topLevel == null) return;
         FilePickerSaveOptions options = new()
@@ -110,6 +119,33 @@ public partial class MainViewModel : ViewModelBase
         {
             await using Stream stream = await fileOut.OpenWriteAsync();
             await stream.WriteAsync(_saveFile.Write());
+        }
+    }
+
+    private void SetTeam()
+    {
+        if(_saveFile is null) return;
+
+        int partyCount = 0;
+        foreach (string member in Constants.Sets.AdededeTowerSingles50)
+        {
+            ShowdownSet set = new ShowdownSet(member);
+            
+            // can adapt to gen in future based on save
+            PKM pkm = new PK3();
+            pkm.ApplySetDetails(set);
+            if (string.IsNullOrEmpty(set.Nickname))
+            {
+                pkm.Nickname = "TEST";
+            }
+            
+            // Still show as traded but at least give the name
+            pkm.OriginalTrainerName = Name;
+            
+            // TODO: If loading saves check where to put them properly
+            _saveFile.SetBoxSlotAtIndex(pkm, 0, partyCount);
+            _saveFile.SetPartySlotAtIndex(pkm, partyCount);
+            partyCount++;
         }
     }
 }
