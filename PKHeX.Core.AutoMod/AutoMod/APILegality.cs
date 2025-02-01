@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using static PKHeX.Core.AutoMod.TracebackType;
-
 namespace PKHeX.Core.AutoMod
 {
     /// <summary>
@@ -141,8 +140,8 @@ namespace PKHeX.Core.AutoMod
                 var pk = EntityConverter.ConvertToType(raw, destType, out _);
                 if (pk == null)
                     continue;
-                if (EntityConverter.IsIncompatibleGB(pk, template.Japanese, pk.Japanese))
-                    continue;
+                // if (EntityConverter.IsIncompatibleGB(pk, template.Japanese, pk.Japanese))
+                //     continue;
 
                 pk = pk.Clone(); // Handle Nickname-Trash issues (weedle word filter)
                 if (HomeTrackerUtil.IsRequired(enc, pk) && !AllowHOMETransferGeneration)
@@ -806,8 +805,8 @@ namespace PKHeX.Core.AutoMod
         {
             if (!SetBattleVersion)
                 return;
-            if (pk.IsNative && !pk.GO)
-                return;
+            // if (pk.IsNative && !pk.GO)
+            //     return;
             if (pk is not IBattleVersion bvPk)
                 return;
 
@@ -872,7 +871,7 @@ namespace PKHeX.Core.AutoMod
             pk.ForceHatchPKM();
             if (enc is MysteryGift { IsEgg: true })
             {
-                if (enc is WC3)
+                if (enc is EncounterGift3)
                     pk.MetLevel = 0; // hatched
                 pk.Language = tr.Language;
                 pk.SetTrainerData(tr);
@@ -1434,7 +1433,7 @@ namespace PKHeX.Core.AutoMod
         {
             if (Method == PIDType.None)
             {
-                if (enc is WC3 wc3)
+                if (enc is EncounterGift3 wc3)
                     Method = wc3.Method;
                 else
                     Method = FindLikelyPIDType(pk);
@@ -1459,7 +1458,7 @@ namespace PKHeX.Core.AutoMod
                 iterPKM.SetAbilityIndex(ability_idx);
             var count = 0;
             var isWishmaker =
-                Method == PIDType.BACD_R && shiny && enc is WC3 { OriginalTrainerName: "WISHMKR" };
+                Method == PIDType.BACD_R && shiny && enc is EncounterGift3 { OriginalTrainerName: "WISHMKR" };
             var compromise = false;
             var gr = pk.PersonalInfo.Gender;
             do
@@ -1563,7 +1562,7 @@ namespace PKHeX.Core.AutoMod
                 3
                     => info.EncounterMatch switch
                     {
-                        WC3 g => g.Method,
+                        EncounterGift3 g => g.Method,
 
                         EncounterStatic3 when pk.Version == GameVersion.CXD => PIDType.CXD,
                         EncounterStatic3Colo when pk.Version == GameVersion.CXD => PIDType.CXD,
@@ -1765,12 +1764,12 @@ namespace PKHeX.Core.AutoMod
             }
             return criteria with
             {
-                IV_ATK = criteria.IV_ATK == 0 ? 0 : -1,
+                IV_ATK = (sbyte)(criteria.IV_ATK == 0 ? 0 : -1),
                 IV_DEF = -1,
                 IV_HP = -1,
                 IV_SPA = -1,
                 IV_SPD = -1,
-                IV_SPE = criteria.IV_SPE == 0 ? 0 : -1
+                IV_SPE = (sbyte)(criteria.IV_SPE == 0 ? 0 : -1)
             };
         }
 

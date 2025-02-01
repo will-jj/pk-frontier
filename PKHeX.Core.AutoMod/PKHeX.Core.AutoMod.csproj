@@ -1,7 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="PKHeX.Core" Version="24.5.5" />
-  </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="PKHeX.Core"/>
+    </ItemGroup>
 </Project>

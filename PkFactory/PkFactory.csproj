@@ -22,4 +22,10 @@
         <PackageReference Include="CommunityToolkit.Mvvm"/>
         <PackageReference Include="PKHeX.Core"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="PKHeX.Core.AutoMod">
+        <HintPath>..\PkFactory.Desktop\bin\Debug\net9.0\PKHeX.Core.AutoMod.dll</HintPath>
+      </Reference>
+    </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -13,6 +13,7 @@ using CommunityToolkit.Mvvm.Input;
 using PkFactory.Services;
 using PKHeX.Core;
 using PkFactory.Models;
+using PKHeX.Core.AutoMod;
 
 namespace PkFactory.ViewModels;
 
@@ -168,9 +169,18 @@ public partial class MainViewModel : ViewModelBase
             // Still show as traded but at least give the name
             pkm.OriginalTrainerName = Name;
             
+            // Make them legal
+
+            PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
+            if (result == LegalizationResult.Failed)
+            {
+                member.IsNotValid = true;
+                continue;
+            }
+            
             // TODO: If loading saves check where to put them properly
-            _saveFile.SetBoxSlotAtIndex(pkm, 0, partyCount);
-            _saveFile.SetPartySlotAtIndex(pkm, partyCount);
+            _saveFile.SetBoxSlotAtIndex(pkmLegal, 0, partyCount);
+            _saveFile.SetPartySlotAtIndex(pkmLegal, partyCount);
             partyCount++;
         }
     }
