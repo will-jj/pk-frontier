@@ -10,6 +10,9 @@ public partial class Set : ViewModelBase
 
     [ObservableProperty]
     private bool _isNotValid;
+    
+    [ObservableProperty]
+    string _errors = string.Empty;
 
     public Set()
     {

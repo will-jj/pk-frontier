@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -26,7 +26,7 @@ public partial class MainViewModel : ViewModelBase
     private string? _filename = "emerald-factory.sav";
 
     [ObservableProperty]
-    private string _greeting = "Create Emerald Frontier Ready Save";
+    private string _greeting = "Create Frontier Ready Save";
 
     private string _name = string.Empty;
 
@@ -38,7 +38,7 @@ public partial class MainViewModel : ViewModelBase
     public MainViewModel()
     {
         SelectedGender = GenderSelects[0];
-        SelectedSet = SetOptions[0];
+        APILegality.SetAllLegalRibbons = false;
     }
 
     [Required]
@@ -52,7 +52,6 @@ public partial class MainViewModel : ViewModelBase
     
 
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
-    public ObservableCollection<string> SetOptions { get; set; } = ["Blank", "Adedede Battle Tower Singles Lv. 50"];
     public ObservableCollection<Set> Sets { get; set; } = new()
     {
         new(),
@@ -101,7 +100,22 @@ public partial class MainViewModel : ViewModelBase
             {
                 CanSaveFile = true;
                 Name = _saveFile.OT;
+                if (_saveFile.Gender == (byte)PKHeX.Core.Gender.Female)
+                {
+                    SelectedGender = "Girl";
+                }
+                else
+                {
+                    SelectedGender = "Boy";
+                }
             }
+        }
+
+        if (IncludeTeam)
+        {
+            // TODO: fix this too
+            OnIncludeTeamChanged(IncludeTeam);
+            UpdateSets();
         }
     }
 
@@ -139,17 +153,16 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    private void SetTeam()
+    private void UpdateSets()
     {
+        // TODO: Fix code repition
         if(_saveFile is null) return;
-
-        int partyCount = 0;
         foreach (Set member in Sets)
         {
-
             ShowdownSet set = new(member.ShowdownText);
             if (set.InvalidLines.Count > 0 || set.Species == 0)
             {
+                member.Errors = string.Join('\n', set.InvalidLines);
                 member.IsNotValid = true;
                 continue;
             }
@@ -157,7 +170,19 @@ public partial class MainViewModel : ViewModelBase
             member.IsNotValid = false;
 
             // can adapt to gen in future based on save
-            PKM pkm = new PK3();
+            PKM pkm;
+            switch (_saveFile.Generation)
+            {
+                case 3:
+                    pkm = new PK3();
+                    break;
+                case 4:
+                    pkm = new PK4();
+                    break;
+                default:
+                    return;
+            }
+
             pkm.ApplySetDetails(set);
             if (string.IsNullOrEmpty(set.Nickname))
             {
@@ -170,17 +195,109 @@ public partial class MainViewModel : ViewModelBase
             pkm.OriginalTrainerName = Name;
             
             // Make them legal
-
             PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
             if (result == LegalizationResult.Failed)
             {
+                LegalityAnalysis la = new(pkmLegal);
+                string report = la.Report();
+                member.Errors = report;
+                member.IsNotValid = true;
+                // redo the analysis just for ease...
+            }
+
+        }
+    }
+
+    private void SetTeam()
+    {
+        if(_saveFile is null) return;
+
+        int partyCount = 0;
+        
+        int numSets = Sets.Count;
+
+
+        int emptyBox = -1;
+        for (int box = 0; box < _saveFile.BoxCount; box++)
+        {
+            var boxData = _saveFile.GetBoxData(box);
+            
+            if (boxData.All(slot => slot.Species == 0)) // Check if all slots in the box are empty
+            {
+                emptyBox = box;
+                break;
+            }
+        }
+        
+        if (numSets > _saveFile.GetBoxData(0).Length || emptyBox == -1)
+        {
+            // Fail for now
+            // TODO: fix this, spread across empty boxes, or position
+            // in threes, or something else...
+            return;
+        }
+        
+        foreach (Set member in Sets)
+        {
+
+            ShowdownSet set = new(member.ShowdownText);
+            if (set.InvalidLines.Count > 0 || set.Species == 0)
+            {
+                member.Errors = string.Join('\n', set.InvalidLines);
                 member.IsNotValid = true;
                 continue;
             }
+
+            member.IsNotValid = false;
+
+            // can adapt to gen in future based on save
+            PKM pkm;
+            switch (_saveFile.Generation)
+            {
+                case 3:
+                    pkm = new PK3();
+                    break;
+                case 4:
+                    pkm = new PK4();
+                    break;
+                default:
+                    return;
+            }
+
+            pkm.ApplySetDetails(set);
+            if (string.IsNullOrEmpty(set.Nickname))
+            {
+                pkm.Nickname = SpeciesName.GetSpeciesNameGeneration(pkm.Species,
+                    2, //_saveFile.Language,
+                    _saveFile.Generation);
+            }
+            
+            // Still show as traded but at least give the name
+            pkm.OriginalTrainerName = Name;
+            
+            // Make them legal
+            PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
+
+            // TODO: fix why it break things / remove it (legality)?
+            pkmLegal.RestoreIVs(pkm.IVs);
+            
+            
+            LegalityAnalysis la = new(pkmLegal);
+            
+            if (!la.Valid)
+            {
+                
+                string report = la.Report();
+                member.Errors = report;
+                member.IsNotValid = true;
+                // redo the analysis just for ease...
+                // allow for now
+                //continue;
+            }
             
             // TODO: If loading saves check where to put them properly
-            _saveFile.SetBoxSlotAtIndex(pkmLegal, 0, partyCount);
-            _saveFile.SetPartySlotAtIndex(pkmLegal, partyCount);
+            _saveFile.SetBoxSlotAtIndex(pkmLegal, emptyBox, partyCount);
+            //_saveFile.SetPartySlotAtIndex(pkmLegal, partyCount);
             partyCount++;
         }
     }
@@ -193,7 +310,7 @@ public partial class MainViewModel : ViewModelBase
         if (SelectedSetIndex == 1)
         {
             Sets.Clear();
-            foreach (string setStr in Constants.Sets.AdededeTowerSingles50)
+            foreach (string setStr in Constants.Sets3.AdededeTowerSingles50)
             {
                 Sets.Add(new(setStr));
             }
@@ -207,5 +324,33 @@ public partial class MainViewModel : ViewModelBase
             }
         }
 
+    }
+
+    partial void OnIncludeTeamChanged(bool value)
+    {
+        if (value)
+        {
+            Sets.Clear();
+            if(_saveFile is null) return;
+            if (_saveFile.Generation == 4)
+            {
+                foreach (string[] team in Constants.Sets.Gen4.Sets4.AllSets)
+                {
+                    foreach (string member in team)
+                    {
+                        Sets.Add(new(member));
+                    }
+                }
+            }
+
+            if (_saveFile.Generation == 3)
+            {
+                // not do anything for now
+            }
+        }
+        else
+        {
+            Sets.Clear();
+        }
     }
 }

@@ -13,7 +13,14 @@
              to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainViewModel />
     </Design.DataContext>
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5">
+    <Grid HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Vertical">
         <StackPanel.Styles>
             <Style Selector="TextBox.class1">
                 <Setter Property="BorderBrush" Value="Red" />
@@ -29,21 +36,28 @@
                  SelectedItem="{Binding SelectedGender}"
                  Classes="RadioButtonListBox"
                  Margin="5" />
-        <CheckBox IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Team</CheckBox>
-        <ComboBox ItemsSource="{Binding SetOptions, Mode=TwoWay}" IsVisible="{Binding IncludeTeam, Mode=TwoWay}"
-                  SelectedItem="{Binding SelectedSet, Mode=TwoWay}" SelectedIndex="{Binding SelectedSetIndex, Mode=TwoWay}" />
-        <ItemsControl ItemsSource="{Binding Sets}" IsVisible="{Binding IncludeTeam}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                            <TextBox  Classes.class1="{Binding IsNotValid}"
-                                       MinWidth="200" MinHeight="100" Margin="5" Text="{Binding ShowdownText}" AcceptsReturn="True">
-                            </TextBox>
-                            
-                        </StackPanel>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Button HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" Content="Save" />
-    </StackPanel>
+        
+        <CheckBox IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
+        </StackPanel>
+        <ScrollViewer MaxHeight="500" Grid.Row="1" HorizontalAlignment="Center" Margin="5">
+            <ItemsControl ItemsSource="{Binding Sets}" IsVisible="{Binding IncludeTeam}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                                <TextBox  Classes.class1="{Binding IsNotValid}"
+                                           MinWidth="200" MinHeight="100" Margin="5" Text="{Binding ShowdownText}" AcceptsReturn="True">
+                                </TextBox>
+                                <TextBox IsVisible="{Binding IsNotValid}" Text="{Binding Errors}"></TextBox>
+                            </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top">
+            <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Add Existing Save to Modify</Button>
+            <Button HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" Content="Save" />
+        </StackPanel>
+
+    </Grid>
+
 </UserControl>

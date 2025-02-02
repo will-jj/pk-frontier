@@ -899,7 +899,8 @@ namespace PKHeX.Core.AutoMod
             var ivprop = enc.GetType().GetProperty("IVs");
             if (enc is not EncounterStatic4Pokewalker && enc.Generation > 2)
                 ShowdownEdits.SetNature(pk, set, enc);
-
+                // TODO: See why ivprop isn't working
+            pk.SetIVs(set.IVs);
             // If PID and IV is handled in PreSetPIDIV, don't set it here again and return out
             var hascurry = set.GetBatchValue(nameof(IRibbonSetMark8.RibbonMarkCurry));
             var changeec =
