@@ -1,6 +1,6 @@
 namespace PkFactory.Constants;
 
-public static class Sets
+public static class Sets3
 {
     // Adedede's team
     // https://www.smogon.com/forums/threads/gen-iii-battle-frontier-discussion-and-records.3648697/
@@ -49,5 +49,7 @@ public static class Sets
         - Dragon Claw  
         """;
 
+
+    
     public static readonly string[] AdededeTowerSingles50 = [SkarmoryAdedede, BlisseyAdedede, LatiosAdedede];
 }
