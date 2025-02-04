@@ -279,8 +279,14 @@ public partial class MainViewModel : ViewModelBase
             PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
 
             // TODO: fix why it break things / remove it (legality)?
-            pkmLegal.RestoreIVs(pkm.IVs);
+            // Issues with PID - and it gives up
+            // PokeFinder can do it though...
             
+            pkmLegal.RestoreIVs(pkm.IVs);
+
+            // 
+            if (pkmLegal.Nickname == "UXIE")
+                pkmLegal.PID = 0x8CBCA403;
             
             LegalityAnalysis la = new(pkmLegal);
             
