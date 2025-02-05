@@ -45,9 +45,9 @@
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                                 <TextBox  Classes.class1="{Binding IsNotValid}"
-                                           MinWidth="200" MinHeight="100" Margin="5" Text="{Binding ShowdownText}" AcceptsReturn="True">
+                                          Name="ShowDownTextBox" MinWidth="200" MinHeight="100" Margin="5" Text="{Binding ShowdownText}" AcceptsReturn="True">
                                 </TextBox>
-                                <TextBox IsVisible="{Binding IsNotValid}" Text="{Binding Errors}"></TextBox>
+                                <TextBox Height="{Binding #ShowDownTextBox.Bounds.Height}" IsVisible="{Binding IsNotValid}" Text="{Binding Errors}" ></TextBox>
                             </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
