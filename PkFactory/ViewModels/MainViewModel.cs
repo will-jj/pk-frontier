@@ -35,6 +35,9 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private string _selectedGender;
+    
+    [ObservableProperty]
+    private string? _selectedGame;
 
     public MainViewModel()
     {
@@ -51,7 +54,8 @@ public partial class MainViewModel : ViewModelBase
         set => SetProperty(ref _name, value, true);
     }
     
-
+    
+    public ObservableCollection<string> Games { get; set; } = ["Emerald", "Heart Gold"];
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
     public ObservableCollection<Set> Sets { get; set; } = new()
     {
@@ -70,9 +74,9 @@ public partial class MainViewModel : ViewModelBase
     private bool _includeTeam;
     
     [RelayCommand]
-    public async Task GetPreppedFile()
+    public async Task GetPreppedFile(string asset)
     {
-        Stream datain = AssetLoader.Open(new Uri("avares://PkFactory/Assets/pokeemerald.sav"));
+        Stream datain = AssetLoader.Open(new Uri(asset));
         using MemoryStream memoryStream = new();
         await datain.CopyToAsync(memoryStream);
         byte[] byteArray = memoryStream.ToArray();
@@ -197,6 +201,11 @@ public partial class MainViewModel : ViewModelBase
             
             // Make them legal
             PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
+            pkmLegal.RestoreIVs(pkm.IVs);
+
+            if (member.PID is not null)
+                pkmLegal.PID = (uint)member.PID;
+            
             if (result == LegalizationResult.Failed)
             {
                 LegalityAnalysis la = new(pkmLegal);
@@ -357,6 +366,35 @@ public partial class MainViewModel : ViewModelBase
         else
         {
             Sets.Clear();
+        }
+
+        UpdateSets();
+    }
+
+    async partial void OnSelectedGameChanged(string? value)
+    {
+        try
+        {
+            if (value is null) return;
+            Sets.Clear();
+            CanSaveFile = false;
+            switch (value)
+            {
+                case "Emerald":
+                    await GetPreppedFile("avares://PkFactory/Assets/pokeemerald.sav");
+                    break;
+                case "Heart Gold":
+                    await GetPreppedFile("avares://PkFactory/Assets/HeartGold.sav");
+                    break;
+            }
+            
+            // Hack hack hack 
+            OnIncludeTeamChanged(IncludeTeam);
+        }
+        catch (Exception e)
+        {
+            throw; // TODO handle exception
+            // Or just fix this method...
         }
     }
 }

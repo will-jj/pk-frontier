@@ -28,6 +28,7 @@
         </StackPanel.Styles>
         <TextBlock FontSize="20" Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center"
                    Margin="5" />
+        <ComboBox Margin="5" ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}" PlaceholderText="Game"></ComboBox>
         <!-- <Button HorizontalAlignment="Center"  Command="{Binding GetPreppedFileCommand}" Content="Load" Margin="5" /> -->
         <TextBox HorizontalAlignment="Left" MinWidth="100" Watermark="Name" Text="{Binding Name, Mode=TwoWay}"
                  Margin="5" />
@@ -36,10 +37,12 @@
                  SelectedItem="{Binding SelectedGender}"
                  Classes="RadioButtonListBox"
                  Margin="5" />
-        
-        <CheckBox IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Margin="5" IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
+            <CheckBox Margin="5" Name="EditTeams">Edit Teams</CheckBox>
         </StackPanel>
-        <ScrollViewer MaxHeight="500" Grid.Row="1" HorizontalAlignment="Center" Margin="5">
+        </StackPanel>
+        <ScrollViewer IsVisible="{Binding #EditTeams.IsChecked}" MaxHeight="500" Grid.Row="1" HorizontalAlignment="Center" Margin="5">
             <ItemsControl ItemsSource="{Binding Sets}" IsVisible="{Binding IncludeTeam}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -54,7 +57,7 @@
             </ItemsControl>
         </ScrollViewer>
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top">
-            <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Add Existing Save to Modify</Button>
+            <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Optional: Add Existing Save to Modify</Button>
             <Button HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" Content="Save" />
         </StackPanel>
 
