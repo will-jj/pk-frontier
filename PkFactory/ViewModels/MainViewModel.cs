@@ -10,6 +10,7 @@ using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using PkFactory.Constants.Sets.Gen3;
 using PkFactory.Services;
 using PKHeX.Core;
 using PkFactory.Models;
@@ -155,7 +156,7 @@ public partial class MainViewModel : ViewModelBase
 
     private void UpdateSets()
     {
-        // TODO: Fix code repition
+        // TODO: Fix code repetition
         if(_saveFile is null) return;
         foreach (Set member in Sets)
         {
@@ -284,9 +285,8 @@ public partial class MainViewModel : ViewModelBase
             
             pkmLegal.RestoreIVs(pkm.IVs);
 
-            // 
-            if (pkmLegal.Nickname == "UXIE")
-                pkmLegal.PID = 0x8CBCA403;
+            if (member.PID is not null)
+                pkmLegal.PID = (uint)member.PID;
             
             LegalityAnalysis la = new(pkmLegal);
             
@@ -316,9 +316,9 @@ public partial class MainViewModel : ViewModelBase
         if (SelectedSetIndex == 1)
         {
             Sets.Clear();
-            foreach (string setStr in Constants.Sets3.AdededeTowerSingles50)
+            foreach (Pokemon mon in Sets3.AdededeTowerSingles50.Members)
             {
-                Sets.Add(new(setStr));
+                Sets.Add(new(mon.Showdown));
             }
         }
         else
@@ -340,11 +340,11 @@ public partial class MainViewModel : ViewModelBase
             if(_saveFile is null) return;
             if (_saveFile.Generation == 4)
             {
-                foreach (string[] team in Constants.Sets.Gen4.Sets4.AllSets)
+                foreach (Team team in Constants.Sets.Gen4.Sets4.AllSets)
                 {
-                    foreach (string member in team)
+                    foreach (Pokemon member in team.Members)
                     {
-                        Sets.Add(new(member));
+                        Sets.Add(new(member.Showdown, member.PID));
                     }
                 }
             }

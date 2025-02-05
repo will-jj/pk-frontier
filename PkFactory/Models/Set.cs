@@ -13,14 +13,17 @@ public partial class Set : ViewModelBase
     
     [ObservableProperty]
     string _errors = string.Empty;
+    
+    public uint? PID { get; set; }
 
     public Set()
     {
     }
 
-    public Set(string showdownText)
+    public Set(string showdownText, uint? pID = null)
     {
         ShowdownText = showdownText;
         IsNotValid = false;
+        PID = pID;
     }
 }
