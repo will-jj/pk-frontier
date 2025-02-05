@@ -201,7 +201,7 @@ public static readonly Pokemon SalamenceMagpie = new()
         - Dragon Claw
         """
 };
-public static readonly Team Itol6Team = new Team()
+public static readonly Team Itol6Team = new()
 {
     OT = "Itol6",
     Tags = Tags.Arcade,
@@ -209,7 +209,7 @@ public static readonly Team Itol6Team = new Team()
     OriginalSource = null
 };
 
-public static readonly Team TREArcardeSingles = new Team()
+public static readonly Team TREArcardeSingles = new()
 {
     OT = "TRE",
     Tags = Tags.Arcade | Tags.Singles,
@@ -217,7 +217,7 @@ public static readonly Team TREArcardeSingles = new Team()
     OriginalSource = null
 };
 
-public static readonly Team SquilliamsArcadeSingles = new Team()
+public static readonly Team SquilliamsArcadeSingles = new()
 {
     OT = "Squilliams",
     Tags = Tags.Arcade | Tags.Singles,
@@ -225,7 +225,7 @@ public static readonly Team SquilliamsArcadeSingles = new Team()
     OriginalSource = null
 };
 
-public static readonly Team MagpieArcadeSingles220 = new Team()
+public static readonly Team MagpieArcadeSingles220 = new()
 {
     OT = "Magpie",
     Tags = Tags.Arcade | Tags.Singles,

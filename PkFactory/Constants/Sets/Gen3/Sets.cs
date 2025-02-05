@@ -61,7 +61,7 @@ public static class Sets3
             """
     };
 
-    public static readonly Team AdededeTowerSingles50 = new Team()
+    public static readonly Team AdededeTowerSingles50 = new()
     {
         OT = "Adedede",
         Tags = Tags.Tower | Tags.Singles,
