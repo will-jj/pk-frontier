@@ -32,7 +32,7 @@ public static readonly Pokemon ArticunoItol6 = new()
         Level: 50
         EVs: 252 HP / 4 SpD / 252 Spe
         Timid Nature
-        IVs: 2 Atk / 30 Def / 30 SpA
+        IVs: 2 Atk / 30 SpA
         - Sheer Cold
         - Mind Reader
         - Substitute
