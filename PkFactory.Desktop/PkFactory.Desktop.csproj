@@ -5,6 +5,10 @@
         One for Windows with net9.0-windows TFM, one for MacOS with net9.0-macos and one with net9.0 TFM for Linux.-->
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <RunAOTCompilation>true</RunAOTCompilation>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     </PropertyGroup>
 

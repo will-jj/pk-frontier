@@ -24,12 +24,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Reference Include="PKHeX.Core.AutoMod">
-        <HintPath>..\PkFactory.Desktop\bin\Debug\net9.0\PKHeX.Core.AutoMod.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\PKHeX.Core.AutoMod\PKHeX.Core.AutoMod.csproj" />
     </ItemGroup>
 </Project>
