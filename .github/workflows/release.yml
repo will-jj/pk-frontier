@@ -40,7 +40,7 @@ jobs:
             release_name="PkFrontier-$tag-${{ matrix.target }}"
   
             # Build everything
-            dotnet publish PkFactory.Desktop/PkFactory.Desktop.csproj /p:DebugType=None /p:DebugSymbols=false --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+            dotnet publish PkFactory.Desktop/PkFactory.Desktop.csproj /property:DebugType=None /property:DebugSymbols=false --runtime "${{ matrix.target }}" -c Release -o "$release_name"
   
             # Pack files
             if [ "${{ matrix.target }}" == "win-x64" ]; then
