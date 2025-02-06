@@ -40,7 +40,7 @@ jobs:
             release_name="PkFrontier-$tag-${{ matrix.target }}"
   
             # Build everything
-            dotnet publish PkFactory.Desktop/PkFactory.Desktop.csproj --runtime "${{ matrix.target }}" -c Release -o "$release_name"
+            dotnet publish PkFactory.Desktop/PkFactory.Desktop.csproj --runtime "${{ matrix.target }}" -c Release -o "$release_name" /p:DebugType=None /p:DebugSymbols=false
   
             # Pack files
             if [ "${{ matrix.target }}" == "win-x64" ]; then
@@ -58,6 +58,5 @@ jobs:
           with:
             files: |
               PkFrontier* 
-              !*.pdb
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
