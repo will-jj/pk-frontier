@@ -199,11 +199,13 @@ public partial class MainViewModel : ViewModelBase
             // Still show as traded but at least give the name
             pkm.OriginalTrainerName = Name;
             
+#if !BROWSER
+            
             // Make them legal
             PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
             pkmLegal.RestoreIVs(pkm.IVs);
 
-            if (member.PID is not null)
+           if (member.PID is not null)
                 pkmLegal.PID = (uint)member.PID;
             
             if (result == LegalizationResult.Failed)
@@ -214,6 +216,7 @@ public partial class MainViewModel : ViewModelBase
                 member.IsNotValid = true;
                 // redo the analysis just for ease...
             }
+#endif
 
         }
     }
@@ -285,6 +288,7 @@ public partial class MainViewModel : ViewModelBase
             // Still show as traded but at least give the name
             pkm.OriginalTrainerName = Name;
             
+            #if !BROWSER
             // Make them legal
             PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
 
@@ -309,10 +313,12 @@ public partial class MainViewModel : ViewModelBase
                 // allow for now
                 //continue;
             }
+
+            pkm = pkmLegal;
+            #endif
             
             // TODO: If loading saves check where to put them properly
-            _saveFile.SetBoxSlotAtIndex(pkmLegal, emptyBox, partyCount);
-            //_saveFile.SetPartySlotAtIndex(pkmLegal, partyCount);
+            _saveFile.SetBoxSlotAtIndex(pkm, emptyBox, partyCount);
             partyCount++;
         }
     }
