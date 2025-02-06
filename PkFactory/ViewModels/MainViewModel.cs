@@ -392,9 +392,11 @@ public partial class MainViewModel : ViewModelBase
             switch (value)
             {
                 case "Emerald":
+                    _filename = "pkfrontier-emerald.sav";
                     await GetPreppedFile("avares://PkFactory/Assets/pokeemerald.sav");
                     break;
                 case "Heart Gold":
+                    _filename = "pkfrontier-hg.sav";
                     await GetPreppedFile("avares://PkFactory/Assets/HeartGold.sav");
                     break;
             }
