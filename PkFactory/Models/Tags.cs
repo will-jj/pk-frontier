@@ -7,5 +7,6 @@ public enum Tags
 {
     Arcade,
     Tower,
-    Singles
+    Singles,
+    Hall,
 }

@@ -201,6 +201,290 @@ public static readonly Pokemon SalamenceMagpie = new()
         - Dragon Claw
         """
 };
+
+public static readonly Pokemon Pachirisu1 = new()
+{
+    Showdown = 
+        """
+        Pachirisu (F) @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 40 HP / 252 SpA / 212 Spe
+        Modest Nature
+        - Thunder
+        - Thunderbolt
+        - Shock Wave
+        - Hidden Power [Ice]
+        """,
+};
+
+public static readonly Pokemon Pachirisu2 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 40 HP / 252 SpA / 212 Spe
+        Modest Nature
+        IVs: 3 Atk
+        - Thunderbolt
+        - Discharge
+        - Shock Wave
+        - Hidden Power [Dark]
+        """,
+};
+
+public static readonly Pokemon Pachirisu3 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Expert Belt
+        Ability: Run Away
+        Level: 30
+        EVs: 40 HP / 252 SpA / 212 Spe
+        Modest Nature
+        IVs: 2 Atk / 30 SpA / 30 Spe
+        - Thunder
+        - Hidden Power [Fire]
+        - Bide
+        - Magnet Rise
+        """,
+};
+
+public static readonly Pokemon Pachirisu4 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 252 SpA / 16 SpD / 240 Spe
+        Modest Nature
+        IVs: 30 HP / 2 Atk / 30 Def / 30 SpD / 30 Spe
+        - Thunder
+        - Thunderbolt
+        - Shock Wave
+        - Hidden Power [Ground]
+        """,
+};
+
+public static readonly Pokemon Pachirisu5 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 16 HP / 252 SpA / 28 SpD / 212 Spe
+        Modest Nature
+        IVs: 2 Atk / 30 Def / 30 SpD
+        - Thunder
+        - Thunderbolt
+        - Hidden Power [Bug]
+        - Toxic
+        """,
+};
+
+public static readonly Pokemon Pachirisu6 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Expert Belt
+        Ability: Run Away
+        Level: 30
+        EVs: 92 HP / 216 SpA / 200 Spe
+        Timid Nature
+        - Thunderbolt
+        - Hidden Power [Fighting]
+        - Fake Tears
+        - Substitute
+        """,
+};
+
+public static readonly Pokemon Pachirisu7 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 28 HP / 248 SpA / 232 Spe
+        Modest Nature
+        IVs: 30 HP / 28 Atk / 30 Def / 28 SpA / 30 SpD / 29 Spe
+        - Thunder
+        - Thunderbolt
+        - Discharge
+        - Hidden Power [Flying]
+        """,
+};
+
+public static readonly Pokemon Pachirisu8 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 64 HP / 92 Def / 156 SpA / 196 Spe
+        Timid Nature
+        - Thunderbolt
+        - Fling
+        - Bide
+        - Rest
+        """,
+};
+
+public static readonly Pokemon Pachirisu9 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Lum Berry
+        Ability: Run Away
+        Level: 30
+        EVs: 20 HP / 252 Atk / 236 Spe
+        Adamant Nature
+        - Dig
+        - Super Fang
+        - Bide
+        - Rain Dance
+        """,
+};
+
+public static readonly Pokemon Pachirisu10 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 24 HP / 252 SpA / 36 SpD / 196 Spe
+        Timid Nature
+        - Hidden Power [Ice]
+        - Grass Knot
+        - Super Fang
+        - Magnet Rise
+        """,
+};
+
+public static readonly Pokemon Pachirisu11 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Choice Specs
+        Ability: Run Away
+        Level: 30
+        EVs: 200 HP / 40 Def / 252 SpA / 16 Spe
+        Modest Nature
+        IVs: 3 Atk / 30 SpA / 30 SpD
+        - Thunder
+        - Thunderbolt
+        - Shock Wave
+        - Hidden Power [Ground]
+        """,
+};
+
+public static readonly Pokemon Pachirisu12 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 28 Def / 240 SpA / 240 Spe
+        Modest Nature
+        IVs: 2 Atk / 30 SpA / 30 Spe
+        - Thunder
+        - Thunderbolt
+        - Hidden Power [Fire]
+        - Fake Tears
+        """,
+};
+
+public static readonly Pokemon Pachirisu13 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 40 HP / 252 SpA / 216 Spe
+        Naive Nature
+        IVs: 2 Atk / 30 SpA / 30 Spe
+        - Thunder
+        - Hidden Power [Fire]
+        - Bite
+        - Grass Knot
+        """,
+};
+
+public static readonly Pokemon Pachirisu14 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 24 HP / 56 Def / 252 SpA / 172 Spe
+        Timid Nature
+        - Thunderbolt
+        - Hidden Power [Ice]
+        - Magnet Rise
+        - Substitute
+        """,
+};
+
+public static readonly Pokemon Pachirisu15 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Petaya Berry
+        Ability: Run Away
+        Level: 30
+        EVs: 24 HP / 120 Def / 248 SpA / 76 SpD / 40 Spe
+        Modest Nature
+        - Thunderbolt
+        - Hidden Power [Fighting]
+        - Grass Knot
+        - Substitute
+        """,
+};
+
+public static readonly Pokemon Pachirisu16 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 180 SpA / 144 SpD / 184 Spe
+        Timid Nature
+        - Thunderbolt
+        - Hidden Power [Ice]
+        - Fake Tears
+        - Substitute
+        """,
+};
+
+public static readonly Pokemon Pachirisu17 = new()
+{
+    Showdown = 
+        """
+        Pachirisu @ Focus Sash
+        Ability: Run Away
+        Level: 30
+        EVs: 12 HP / 240 SpA / 20 SpD / 236 Spe
+        Modest Nature
+        - Thunder
+        - Thunderbolt
+        - Hidden Power [Grass]
+        - Swagger
+        """,
+};
+
+
+
+
 public static readonly Team Itol6Team = new()
 {
     OT = "Itol6",
@@ -233,11 +517,24 @@ public static readonly Team MagpieArcadeSingles220 = new()
     OriginalSource = null
 };
 
+public static readonly Team TsitsoPachirisuHallTeam = new()
+{
+    OT = "Tsitso",
+    Tags = Tags.Hall,
+    Members =
+    [
+        Pachirisu1, Pachirisu2, Pachirisu3, Pachirisu4, Pachirisu5, Pachirisu6, Pachirisu7, Pachirisu8, Pachirisu9,
+        Pachirisu10, Pachirisu11, Pachirisu12, Pachirisu13, Pachirisu14, Pachirisu15, Pachirisu16, Pachirisu17
+    ],
+    OriginalSource = "https://pastebin.com/uEMGny4e",
+};
+
 public static readonly List<Team> AllSets =
 [
     Itol6Team,
     TREArcardeSingles,
     SquilliamsArcadeSingles,
-    MagpieArcadeSingles220
+    MagpieArcadeSingles220,
+    TsitsoPachirisuHallTeam,
 ];
 }
