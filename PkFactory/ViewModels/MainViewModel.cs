@@ -35,7 +35,7 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private string _selectedGender;
-    
+
     [ObservableProperty]
     private string? _selectedGame;
 
@@ -53,8 +53,8 @@ public partial class MainViewModel : ViewModelBase
         get => _name;
         set => SetProperty(ref _name, value, true);
     }
-    
-    
+
+
     public ObservableCollection<string> Games { get; set; } = ["Emerald", "Heart Gold"];
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
     public ObservableCollection<Set> Sets { get; set; } = new()
@@ -66,13 +66,13 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private string _selectedSet;
-    
+
     [ObservableProperty]
     private int _selectedSetIndex;
 
     [ObservableProperty]
     private bool _includeTeam;
-    
+
     [RelayCommand]
     public async Task GetPreppedFile(string asset)
     {
@@ -142,7 +142,7 @@ public partial class MainViewModel : ViewModelBase
         {
             SetTeam();
         }
-        
+
 
         TopLevel? topLevel = DialogManager.GetTopLevelForContext(this);
         if (topLevel == null) return;
@@ -161,7 +161,7 @@ public partial class MainViewModel : ViewModelBase
     private void UpdateSets()
     {
         // TODO: Fix code repetition
-        if(_saveFile is null) return;
+        if (_saveFile is null) return;
         foreach (Set member in Sets)
         {
             ShowdownSet set = new(member.ShowdownText);
@@ -196,12 +196,12 @@ public partial class MainViewModel : ViewModelBase
                     2, //_saveFile.Language,
                     _saveFile.Generation);
             }
-            
+
             // Still show as traded but at least give the name
             pkm.OriginalTrainerName = Name;
 
- // TODO: why this isn't working            
-//#if !BROWSER
+            // TODO: why this isn't working            
+            //#if !BROWSER
             if (!OperatingSystem.IsBrowser())
             {
                 // Make them legal
@@ -226,12 +226,13 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
+
     private void SetTeam()
     {
-        if(_saveFile is null) return;
+        if (_saveFile is null) return;
 
         int partyCount = 0;
-        
+
         int numSets = Sets.Count;
 
 
@@ -239,14 +240,14 @@ public partial class MainViewModel : ViewModelBase
         for (int box = 0; box < _saveFile.BoxCount; box++)
         {
             var boxData = _saveFile.GetBoxData(box);
-            
+
             if (boxData.All(slot => slot.Species == 0)) // Check if all slots in the box are empty
             {
                 emptyBox = box;
                 break;
             }
         }
-        
+
         if (numSets > _saveFile.GetBoxData(0).Length || emptyBox == -1)
         {
             // Fail for now
@@ -254,7 +255,7 @@ public partial class MainViewModel : ViewModelBase
             // in threes, or something else...
             return;
         }
-        
+
         foreach (Set member in Sets)
         {
 
@@ -290,7 +291,7 @@ public partial class MainViewModel : ViewModelBase
                     2, //_saveFile.Language,
                     _saveFile.Generation);
             }
-            
+
             // Still show as traded but at least give the name
             pkm.OriginalTrainerName = Name;
 
@@ -298,11 +299,11 @@ public partial class MainViewModel : ViewModelBase
             {
                 // Make them legal
                 PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
-                
+
                 // TODO: fix why it break things / remove it (legality)?
                 // Issues with PID - and it gives up
                 // PokeFinder can do it though...
-                
+
                 pkmLegal.RestoreIVs(pkm.IVs);
                 
                 if (member.PID is not null)
@@ -333,7 +334,7 @@ public partial class MainViewModel : ViewModelBase
     partial void OnSelectedSetChanged(string? oldValue, string newValue)
     {
         if (oldValue is null) return;
-        
+
         // TODO: make this flexible for any set choice
         if (SelectedSetIndex == 1)
         {
@@ -359,7 +360,7 @@ public partial class MainViewModel : ViewModelBase
         if (value)
         {
             Sets.Clear();
-            if(_saveFile is null) return;
+            if (_saveFile is null) return;
             if (_saveFile.Generation == 4)
             {
                 foreach (Team team in Constants.Sets.Gen4.Sets4.AllSets)
@@ -402,7 +403,7 @@ public partial class MainViewModel : ViewModelBase
                     await GetPreppedFile("avares://PkFactory/Assets/HeartGold.sav");
                     break;
             }
-            
+
             // Hack hack hack 
             OnIncludeTeamChanged(IncludeTeam);
         }
