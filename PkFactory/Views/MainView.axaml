@@ -1,64 +1,107 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:PkFactory.ViewModels"
-             xmlns:sevices="clr-namespace:PkFactory.Services"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="PkFactory.Views.MainView"
-             sevices:DialogManager.Register="{Binding}"
-             x:DataType="vm:MainViewModel">
+<UserControl
+    x:Class="PkFactory.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sevices="clr-namespace:PkFactory.Services"
+    xmlns:vm="clr-namespace:PkFactory.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    sevices:DialogManager.Register="{Binding}"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs)
+        -->
         <vm:MainViewModel />
     </Design.DataContext>
     <Grid HorizontalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <StackPanel Orientation="Vertical">
-        <StackPanel.Styles>
-            <Style Selector="TextBox.class1">
-                <Setter Property="BorderBrush" Value="Red" />
-            </Style>
-        </StackPanel.Styles>
-        <TextBlock FontSize="20" Text="{Binding Greeting}" HorizontalAlignment="Left" VerticalAlignment="Center"
-                   Margin="5" />
-        <ComboBox Margin="5" ItemsSource="{Binding Games}" SelectedItem="{Binding SelectedGame}" PlaceholderText="Game"></ComboBox>
-        <!-- <Button HorizontalAlignment="Center"  Command="{Binding GetPreppedFileCommand}" Content="Load" Margin="5" /> -->
-        <TextBox HorizontalAlignment="Left" MinWidth="100" Watermark="Name" Text="{Binding Name, Mode=TwoWay}"
-                 Margin="5" />
-        <ListBox Background="Transparent"
-                 ItemsSource="{Binding GenderSelects}"
-                 SelectedItem="{Binding SelectedGender}"
-                 Classes="RadioButtonListBox"
-                 Margin="5" />
-        <StackPanel Orientation="Horizontal">
-            <CheckBox Margin="5" IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
-            <CheckBox Margin="5" Name="EditTeams">Edit Teams</CheckBox>
+            <StackPanel.Styles>
+                <Style Selector="TextBox.class1">
+                    <Setter Property="BorderBrush" Value="Red" />
+                </Style>
+            </StackPanel.Styles>
+            <TextBlock
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="20"
+                Text="{Binding Greeting}" />
+            <TextBlock
+                Margin="5"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Text="{Binding Message}" />
+            <ComboBox
+                Margin="5"
+                ItemsSource="{Binding Games}"
+                PlaceholderText="Game"
+                SelectedItem="{Binding SelectedGame}" />
+            <!-- <Button HorizontalAlignment="Center"  Command="{Binding GetPreppedFileCommand}" Content="Load" Margin="5" /> -->
+            <TextBox
+                MinWidth="100"
+                Margin="5"
+                HorizontalAlignment="Left"
+                Text="{Binding Name, Mode=TwoWay}"
+                Watermark="Name" />
+            <ListBox
+                Margin="5"
+                Background="Transparent"
+                Classes="RadioButtonListBox"
+                ItemsSource="{Binding GenderSelects}"
+                SelectedItem="{Binding SelectedGender}" />
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Margin="5" IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
+                <CheckBox Name="EditTeams" Margin="5">Edit Teams</CheckBox>
+            </StackPanel>
         </StackPanel>
-        </StackPanel>
-        <ScrollViewer IsVisible="{Binding #EditTeams.IsChecked}" MaxHeight="500" Grid.Row="1" HorizontalAlignment="Center" Margin="5">
-            <ItemsControl ItemsSource="{Binding Sets}" IsVisible="{Binding IncludeTeam}">
+        <ScrollViewer
+            Grid.Row="1"
+            MaxHeight="500"
+            Margin="5"
+            HorizontalAlignment="Center"
+            IsVisible="{Binding #EditTeams.IsChecked}">
+            <ItemsControl IsVisible="{Binding IncludeTeam}" ItemsSource="{Binding Sets}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                                <TextBox  Classes.class1="{Binding IsNotValid}"
-                                          Name="ShowDownTextBox" MinWidth="200" MinHeight="100" Margin="5" Text="{Binding ShowdownText}" AcceptsReturn="True">
-                                </TextBox>
-                                <TextBox Height="{Binding #ShowDownTextBox.Bounds.Height}" IsVisible="{Binding IsNotValid}" Text="{Binding Errors}" ></TextBox>
-                            </StackPanel>
+                            <TextBox
+                                Name="ShowDownTextBox"
+                                MinWidth="200"
+                                MinHeight="100"
+                                Margin="5"
+                                AcceptsReturn="True"
+                                Classes.class1="{Binding IsNotValid}"
+                                Text="{Binding ShowdownText}" />
+                            <TextBox
+                                Height="{Binding #ShowDownTextBox.Bounds.Height}"
+                                IsVisible="{Binding IsNotValid}"
+                                Text="{Binding Errors}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top">
+        <StackPanel
+            Grid.Row="2"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
             <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Optional: Add Existing Save to Modify</Button>
-            <Button HorizontalAlignment="Left" Command="{Binding SaveFileCommand}" Content="Save" />
+            <Button
+                HorizontalAlignment="Left"
+                Command="{Binding SaveFileCommand}"
+                Content="Save" />
         </StackPanel>
 
     </Grid>
