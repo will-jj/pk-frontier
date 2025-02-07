@@ -208,22 +208,28 @@ public partial class MainViewModel : ViewModelBase
                 PKM pkmLegal =
                     _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
                 pkmLegal.RestoreIVs(pkm.IVs);
+                pkm = pkmLegal;
 
-                if (member.PID is not null)
-                    pkmLegal.PID = (uint)member.PID;
-
-                if (result == LegalizationResult.Failed)
-                {
-                    LegalityAnalysis la = new(pkmLegal);
-                    string report = la.Report();
-                    member.Errors = report;
-                    member.IsNotValid = true;
-                    // redo the analysis just for ease...
-                }
             }
-//#endif
 
+            if (member.PID is not null)
+                pkm.PID = (uint)member.PID;
+
+            LegalityAnalysis la = new(pkm);
+
+            if (!la.Valid)
+            {
+
+                string report = la.Report();
+                member.Errors = report;
+                member.IsNotValid = true;
+                // redo the analysis just for ease...
+                // allow for now
+                //continue;
+            }
         }
+        //#endif
+
     }
 
 
@@ -305,25 +311,26 @@ public partial class MainViewModel : ViewModelBase
                 // PokeFinder can do it though...
 
                 pkmLegal.RestoreIVs(pkm.IVs);
-                
-                if (member.PID is not null)
-                    pkmLegal.PID = (uint)member.PID;
-                
-                LegalityAnalysis la = new(pkmLegal);
-                
-                if (!la.Valid)
-                {
-                    
-                    string report = la.Report();
-                    member.Errors = report;
-                    member.IsNotValid = true;
-                    // redo the analysis just for ease...
-                    // allow for now
-                    //continue;
-                }
-                
                 pkm = pkmLegal;
             }
+
+
+            if (member.PID is not null)
+                pkm.PID = (uint)member.PID;
+
+            LegalityAnalysis la = new(pkm);
+
+            if (!la.Valid)
+            {
+
+                string report = la.Report();
+                member.Errors = report;
+                member.IsNotValid = true;
+                // redo the analysis just for ease...
+                // allow for now
+                //continue;
+            }
+
 
             // TODO: If loading saves check where to put them properly
             _saveFile.SetBoxSlotAtIndex(pkm, emptyBox, partyCount);
