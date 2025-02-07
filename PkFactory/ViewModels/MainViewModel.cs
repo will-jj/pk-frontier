@@ -182,7 +182,8 @@ public partial class MainViewModel : ViewModelBase
                     pkm = new PK3();
                     break;
                 case 4:
-                    pkm = new PK4();
+                    //pkm = new PK4();
+                    pkm = _saveFile.PartyData[0].Clone();
                     break;
                 default:
                     return;
@@ -275,7 +276,8 @@ public partial class MainViewModel : ViewModelBase
                     pkm = new PK3();
                     break;
                 case 4:
-                    pkm = new PK4();
+                    //pkm = new PK4();
+                    pkm = _saveFile.PartyData[0].Clone();
                     break;
                 default:
                     return;
