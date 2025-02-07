@@ -29,6 +29,9 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private string _greeting = "Create Frontier Ready Save";
 
+    [ObservableProperty]
+    private string _message;
+
     private string _name = string.Empty;
 
     private SaveFile? _saveFile;
@@ -43,6 +46,10 @@ public partial class MainViewModel : ViewModelBase
     {
         SelectedGender = GenderSelects[0];
         APILegality.SetAllLegalRibbons = false;
+        if(OperatingSystem.IsBrowser())
+        {
+            Message = "Auto legality corrections are currently not applied in the browser, all default Pokemon are however legal, any changes made may not be.";
+        }
     }
 
     [Required]
