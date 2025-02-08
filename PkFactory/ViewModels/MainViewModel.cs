@@ -270,18 +270,18 @@ public partial class MainViewModel : ViewModelBase
 
 
         int emptyBox = -1;
+        List<int> emptyBoxList = new();
         for (int box = 0; box < _saveFile.BoxCount; box++)
         {
             PKM[] boxData = _saveFile.GetBoxData(box);
 
             if (boxData.All(slot => slot.Species == 0)) // Check if all slots in the box are empty
             {
-                emptyBox = box;
-                break;
+                emptyBoxList.Add(box);
             }
         }
 
-        if (numSets > _saveFile.GetBoxData(0).Length || emptyBox == -1)
+        if (numSets > _saveFile.GetBoxData(0).Length*emptyBoxList.Count)
         {
             // Fail for now
             // TODO: fix this, spread across empty boxes, or position
@@ -290,11 +290,27 @@ public partial class MainViewModel : ViewModelBase
         }
 
         List<PKM> monsToAdd = ValidateAndGenerateTeams();
+        emptyBox = emptyBoxList.FirstOrDefault();
+        emptyBoxList.RemoveAt(0);
         foreach (PKM pkm in monsToAdd)
         {
             // TODO: If loading saves check where to put them properly
             _saveFile.SetBoxSlotAtIndex(pkm, emptyBox, partyCount);
             partyCount++;
+            if (partyCount > _saveFile.GetBoxData(0).Length)
+            {
+                partyCount = 0;
+                if (emptyBoxList.Count > 0)
+                {
+                    emptyBox = emptyBoxList.FirstOrDefault();
+                    emptyBoxList.RemoveAt(0);
+                }
+                else
+                {
+                    // Bad or perfect length...
+                    return;
+                }
+            }
         }
     }
 
