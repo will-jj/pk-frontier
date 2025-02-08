@@ -91,6 +91,16 @@ public partial class MainViewModel : ViewModelBase
         if (_saveFile != null) CanSaveFile = true;
     }
 
+    public async Task LoadFileFromDisk(string path)
+    {
+        Stream datain = File.OpenRead(path);
+        using MemoryStream memoryStream = new();
+        await datain.CopyToAsync(memoryStream);
+        byte[] byteArray = memoryStream.ToArray();
+        _saveFile = SaveUtil.GetVariantSAV(byteArray);
+        if (_saveFile != null) CanSaveFile = true;
+    }
+
     [RelayCommand]
     public async Task GetFile()
     {
