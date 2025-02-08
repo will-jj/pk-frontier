@@ -193,8 +193,6 @@ public partial class MainViewModel : ViewModelBase
                 return null;
         }
 
-
-        string huh = set.Ability.ToString();
         pkm.ApplySetDetails(set);
 
         if (string.IsNullOrEmpty(set.Nickname))
