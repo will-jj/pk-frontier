@@ -175,7 +175,62 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    private List<PKM> ValidateAndGenerateTeams()
+    public PKM? PokemonFromSet(Set member, ShowdownSet set)
+    {
+        if(_saveFile is null) return null;
+        
+        PKM pkm;
+        switch (_saveFile.Generation)
+        {
+            case 3:
+                pkm = new PK3();
+                break;
+            case 4:
+                //pkm = new PK4();
+                pkm = _saveFile.PartyData[0].Clone();
+                break;
+            default:
+                return null;
+        }
+
+
+        string huh = set.Ability.ToString();
+        pkm.ApplySetDetails(set);
+
+        if (string.IsNullOrEmpty(set.Nickname))
+        {
+            pkm.Nickname = SpeciesName.GetSpeciesNameGeneration(pkm.Species,
+                2, //_saveFile.Language,
+                _saveFile.Generation);
+        }
+
+        // Still show as traded but at least give the name
+        pkm.OriginalTrainerName = Name;
+
+        // TODO: why this isn't working            
+        //#if !BROWSER
+        if (!OperatingSystem.IsBrowser())
+        {
+            // Make them legal
+            PKM pkmLegal =
+                _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
+            pkmLegal.RestoreIVs(pkm.IVs);
+            
+            // Why do you change swarm...
+            pkmLegal.Ability = pkm.Ability;
+            pkmLegal.ResetPartyStats();
+            pkm = pkmLegal.Clone();
+                
+
+        }
+
+        if (member.PID is not null)
+            pkm.PID = (uint)member.PID;
+        
+        return pkm;
+    }
+
+    public List<PKM> ValidateAndGenerateTeams()
     {
         List<PKM> monsToAdd = new();
         if (_saveFile is null) return monsToAdd;
@@ -192,46 +247,8 @@ public partial class MainViewModel : ViewModelBase
 
             member.IsNotValid = false;
 
-            // can adapt to gen in future based on save
-            PKM pkm;
-            switch (_saveFile.Generation)
-            {
-                case 3:
-                    pkm = new PK3();
-                    break;
-                case 4:
-                    //pkm = new PK4();
-                    pkm = _saveFile.PartyData[0].Clone();
-                    break;
-                default:
-                    return monsToAdd;
-            }
-
-            pkm.ApplySetDetails(set);
-            if (string.IsNullOrEmpty(set.Nickname))
-            {
-                pkm.Nickname = SpeciesName.GetSpeciesNameGeneration(pkm.Species,
-                    2, //_saveFile.Language,
-                    _saveFile.Generation);
-            }
-
-            // Still show as traded but at least give the name
-            pkm.OriginalTrainerName = Name;
-
-            // TODO: why this isn't working            
-            //#if !BROWSER
-            if (!OperatingSystem.IsBrowser())
-            {
-                // Make them legal
-                PKM pkmLegal =
-                    _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
-                pkmLegal.RestoreIVs(pkm.IVs);
-                pkm = pkmLegal;
-
-            }
-
-            if (member.PID is not null)
-                pkm.PID = (uint)member.PID;
+           PKM? pkm = PokemonFromSet(member, set);
+           if(pkm is null) continue;
 
             LegalityAnalysis la = new(pkm);
 
