@@ -207,7 +207,7 @@ public static readonly Pokemon Pachirisu1 = new()
     Showdown = 
         """
         Pachirisu (F) @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 40 HP / 252 SpA / 212 Spe
         Modest Nature
@@ -223,7 +223,7 @@ public static readonly Pokemon Pachirisu2 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 40 HP / 252 SpA / 212 Spe
         Modest Nature
@@ -240,7 +240,7 @@ public static readonly Pokemon Pachirisu3 = new()
     Showdown = 
         """
         Pachirisu @ Expert Belt
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 40 HP / 252 SpA / 212 Spe
         Modest Nature
@@ -257,7 +257,7 @@ public static readonly Pokemon Pachirisu4 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 252 SpA / 16 SpD / 240 Spe
         Modest Nature
@@ -274,7 +274,7 @@ public static readonly Pokemon Pachirisu5 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 16 HP / 252 SpA / 28 SpD / 212 Spe
         Modest Nature
@@ -291,7 +291,7 @@ public static readonly Pokemon Pachirisu6 = new()
     Showdown = 
         """
         Pachirisu @ Expert Belt
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 92 HP / 216 SpA / 200 Spe
         Timid Nature
@@ -307,7 +307,7 @@ public static readonly Pokemon Pachirisu7 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 28 HP / 248 SpA / 232 Spe
         Modest Nature
@@ -324,7 +324,7 @@ public static readonly Pokemon Pachirisu8 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 64 HP / 92 Def / 156 SpA / 196 Spe
         Timid Nature
@@ -340,7 +340,7 @@ public static readonly Pokemon Pachirisu9 = new()
     Showdown = 
         """
         Pachirisu @ Lum Berry
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 20 HP / 252 Atk / 236 Spe
         Adamant Nature
@@ -356,7 +356,7 @@ public static readonly Pokemon Pachirisu10 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 24 HP / 252 SpA / 36 SpD / 196 Spe
         Timid Nature
@@ -372,7 +372,7 @@ public static readonly Pokemon Pachirisu11 = new()
     Showdown = 
         """
         Pachirisu @ Choice Specs
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 200 HP / 40 Def / 252 SpA / 16 Spe
         Modest Nature
@@ -389,7 +389,7 @@ public static readonly Pokemon Pachirisu12 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 28 Def / 240 SpA / 240 Spe
         Modest Nature
@@ -406,7 +406,7 @@ public static readonly Pokemon Pachirisu13 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 40 HP / 252 SpA / 216 Spe
         Naive Nature
@@ -423,7 +423,7 @@ public static readonly Pokemon Pachirisu14 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 24 HP / 56 Def / 252 SpA / 172 Spe
         Timid Nature
@@ -439,7 +439,7 @@ public static readonly Pokemon Pachirisu15 = new()
     Showdown = 
         """
         Pachirisu @ Petaya Berry
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 24 HP / 120 Def / 248 SpA / 76 SpD / 40 Spe
         Modest Nature
@@ -455,7 +455,7 @@ public static readonly Pokemon Pachirisu16 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 180 SpA / 144 SpD / 184 Spe
         Timid Nature
@@ -471,7 +471,7 @@ public static readonly Pokemon Pachirisu17 = new()
     Showdown = 
         """
         Pachirisu @ Focus Sash
-        Ability: Run Away
+        Ability: Pickup
         Level: 30
         EVs: 12 HP / 240 SpA / 20 SpD / 236 Spe
         Modest Nature
@@ -482,6 +482,56 @@ public static readonly Pokemon Pachirisu17 = new()
         """,
 };
 
+public static readonly Pokemon ScizorMagpie = new()
+{
+    Showdown =
+        """
+        Scizor (F) @ Sitrus Berry  
+        Ability: Technician  
+        Level: 50  
+        EVs: 92 HP / 252 Atk / 164 Spe  
+        Adamant Nature  
+        - Bullet Punch  
+        - Bug Bite  
+        - Swords Dance
+        - Roost  
+        """
+};
+
+public static readonly Pokemon SuicuneMagpie = new()
+{
+    Showdown =
+        """
+        Suicune @ Leftovers
+        IVs: 7 Atk / 30 SpA
+        EVs: 252 HP / 197 Def / 1 SpA / 15 SpD / 45 Spe
+        Ability: Pressure
+        Level: 50
+        Bold Nature
+        - Surf
+        - Hidden Power [Electric]
+        - Calm Mind
+        - Rest
+        """
+};
+
+
+public static readonly Pokemon GarchompMagpie = new()
+{
+    Showdown = 
+        """
+        Garchomp (M)
+        Ability: Sand Veil
+        Level: 50
+        EVs: 12 HP / 252 Atk / 244 Spe
+        Jolly Nature
+        - Earthquake
+        - Substitute
+        - Outrage
+        - Swords Dance 
+        """
+};
+
 
 
 
@@ -490,7 +540,7 @@ public static readonly Team Itol6Team = new()
     OT = "Itol6",
     Tags = Tags.Arcade,
     Members = [CresseliaItoI6, ArticunoItol6, GarchompItol6],
-    OriginalSource = null
+    OriginalSource = "https://www.smogon.com/forums/threads/4th-generation-battle-facilities-discussion-and-records.3663294/page-3#post-8606917"
 };
 
 public static readonly Team TREArcardeSingles = new()
@@ -517,6 +567,14 @@ public static readonly Team MagpieArcadeSingles220 = new()
     OriginalSource = null
 };
 
+public static readonly Team MagpieArcadeSingles220Final = new()
+{
+    OT = "Magpie",
+    Tags = Tags.Arcade | Tags.Singles,
+    Members = [GarchompMagpie, ScizorMagpie, SuicuneMagpie],
+    OriginalSource = null
+};
+
 public static readonly Team TsitsoPachirisuHallTeam = new()
 {
     OT = "Tsitso",
@@ -535,6 +593,7 @@ public static readonly List<Team> AllSets =
     TREArcardeSingles,
     SquilliamsArcadeSingles,
     MagpieArcadeSingles220,
+    MagpieArcadeSingles220Final,
     TsitsoPachirisuHallTeam,
 ];
 }
