@@ -165,10 +165,11 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
-    private void UpdateSets()
+    private List<PKM> ValidateAndGenerateTeams()
     {
-        // TODO: Fix code repetition
-        if (_saveFile is null) return;
+        List<PKM> monsToAdd = new();
+        if (_saveFile is null) return monsToAdd;
+        
         foreach (Set member in Sets)
         {
             ShowdownSet set = new(member.ShowdownText);
@@ -193,7 +194,7 @@ public partial class MainViewModel : ViewModelBase
                     pkm = _saveFile.PartyData[0].Clone();
                     break;
                 default:
-                    return;
+                    return monsToAdd;
             }
 
             pkm.ApplySetDetails(set);
@@ -234,9 +235,18 @@ public partial class MainViewModel : ViewModelBase
                 // allow for now
                 //continue;
             }
+            monsToAdd.Add(pkm);
         }
-        //#endif
+        
+        return monsToAdd;
+        
+    }
 
+    private void UpdateSets()
+    {
+        // TODO: Fix code repetition
+        if (_saveFile is null) return;
+        _ = ValidateAndGenerateTeams();
     }
 
 
@@ -252,7 +262,7 @@ public partial class MainViewModel : ViewModelBase
         int emptyBox = -1;
         for (int box = 0; box < _saveFile.BoxCount; box++)
         {
-            var boxData = _saveFile.GetBoxData(box);
+            PKM[] boxData = _saveFile.GetBoxData(box);
 
             if (boxData.All(slot => slot.Species == 0)) // Check if all slots in the box are empty
             {
@@ -269,76 +279,9 @@ public partial class MainViewModel : ViewModelBase
             return;
         }
 
-        foreach (Set member in Sets)
+        List<PKM> monsToAdd = ValidateAndGenerateTeams();
+        foreach (PKM pkm in monsToAdd)
         {
-
-            ShowdownSet set = new(member.ShowdownText);
-            if (set.InvalidLines.Count > 0 || set.Species == 0)
-            {
-                member.Errors = string.Join('\n', set.InvalidLines);
-                member.IsNotValid = true;
-                continue;
-            }
-
-            member.IsNotValid = false;
-
-            // can adapt to gen in future based on save
-            PKM pkm;
-            switch (_saveFile.Generation)
-            {
-                case 3:
-                    pkm = new PK3();
-                    break;
-                case 4:
-                    //pkm = new PK4();
-                    pkm = _saveFile.PartyData[0].Clone();
-                    break;
-                default:
-                    return;
-            }
-
-            pkm.ApplySetDetails(set);
-            if (string.IsNullOrEmpty(set.Nickname))
-            {
-                pkm.Nickname = SpeciesName.GetSpeciesNameGeneration(pkm.Species,
-                    2, //_saveFile.Language,
-                    _saveFile.Generation);
-            }
-
-            // Still show as traded but at least give the name
-            pkm.OriginalTrainerName = Name;
-
-            if (!OperatingSystem.IsBrowser())
-            {
-                // Make them legal
-                PKM pkmLegal = _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
-
-                // TODO: fix why it break things / remove it (legality)?
-                // Issues with PID - and it gives up
-                // PokeFinder can do it though...
-
-                pkmLegal.RestoreIVs(pkm.IVs);
-                pkm = pkmLegal;
-            }
-
-
-            if (member.PID is not null)
-                pkm.PID = (uint)member.PID;
-
-            LegalityAnalysis la = new(pkm);
-
-            if (!la.Valid)
-            {
-
-                string report = la.Report();
-                member.Errors = report;
-                member.IsNotValid = true;
-                // redo the analysis just for ease...
-                // allow for now
-                //continue;
-            }
-
-
             // TODO: If loading saves check where to put them properly
             _saveFile.SetBoxSlotAtIndex(pkm, emptyBox, partyCount);
             partyCount++;
