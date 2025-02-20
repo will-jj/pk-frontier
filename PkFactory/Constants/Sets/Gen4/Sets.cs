@@ -65,6 +65,7 @@ public static readonly Pokemon GarchompTRE = new()
         Garchomp
         Ability: Sand Veil
         Nature: Jolly
+        Level: 50
         EVs: 6 HP / 252 Atk / 252 Spd
         - Earthquake
         - Outrage
@@ -80,6 +81,7 @@ public static readonly Pokemon BlisseyTRE = new()
         Blissey
         Ability: Natural Cure
         Nature: Bold
+        Level: 50
         EVs: 252 HP / 252 Def / 6 SpD
         - Seismic Toss
         - Counter
@@ -95,6 +97,7 @@ public static readonly Pokemon GengarTRE = new()
         Gengar
         Ability: Levitate
         Nature: Timid
+        Level: 50
         EVs: 6 HP / 252 SpA / 252 Spd
         - Thunderbolt
         - Counter
@@ -158,7 +161,7 @@ public static readonly Pokemon UxieMagpie = new()
         """
         Uxie
         Ability: Levitate
-        Level: 90
+        Level: 50
         EVs: 252 HP / 4 Def / 20 SpD / 228 Spe
         Timid Nature
         IVs: 0 Atk
@@ -192,7 +195,7 @@ public static readonly Pokemon SalamenceMagpie = new()
         """
         Salamence (M)
         Ability: Intimidate
-        Level: 93
+        Level: 50
         EVs: 212 HP / 252 Atk / 12 Def / 28 SpD / 4 Spe
         Adamant Nature
         - Dragon Dance
