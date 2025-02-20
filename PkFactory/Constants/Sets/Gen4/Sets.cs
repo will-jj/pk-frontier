@@ -521,7 +521,8 @@ public static readonly Pokemon SuicuneMagpie = new()
         - Hidden Power [Electric]
         - Calm Mind
         - Rest
-        """
+        """,
+    PID = 0xB17ADF44
 };
 
 
