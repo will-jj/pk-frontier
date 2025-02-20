@@ -214,6 +214,7 @@ public static readonly Pokemon Pachirisu1 = new()
         Level: 30
         EVs: 40 HP / 252 SpA / 212 Spe
         Modest Nature
+        IVs: 30 Atk / 30 Def
         - Thunder
         - Thunderbolt
         - Shock Wave
@@ -230,7 +231,6 @@ public static readonly Pokemon Pachirisu2 = new()
         Level: 30
         EVs: 40 HP / 252 SpA / 212 Spe
         Modest Nature
-        IVs: 3 Atk
         - Thunderbolt
         - Discharge
         - Shock Wave
@@ -245,9 +245,9 @@ public static readonly Pokemon Pachirisu3 = new()
         Pachirisu @ Expert Belt
         Ability: Pickup
         Level: 30
-        EVs: 40 HP / 252 SpA / 212 Spe
+        EVs: 40 HP / 240 SpA / 228 Spe
         Modest Nature
-        IVs: 2 Atk / 30 SpA / 30 Spe
+        IVs: 30 HP / 30 Atk / 30 SpA / 30 Spe
         - Thunder
         - Hidden Power [Fire]
         - Bide
@@ -264,7 +264,7 @@ public static readonly Pokemon Pachirisu4 = new()
         Level: 30
         EVs: 252 SpA / 16 SpD / 240 Spe
         Modest Nature
-        IVs: 30 HP / 2 Atk / 30 Def / 30 SpD / 30 Spe
+        IVs: 30 HP / 30 Atk / 30 Def / 30 SpD / 30 Spe
         - Thunder
         - Thunderbolt
         - Shock Wave
@@ -280,8 +280,8 @@ public static readonly Pokemon Pachirisu5 = new()
         Ability: Pickup
         Level: 30
         EVs: 16 HP / 252 SpA / 28 SpD / 212 Spe
-        Modest Nature
-        IVs: 2 Atk / 30 Def / 30 SpD
+        Timid Nature
+        IVs: 30 HP / 30 Atk / 30 Def / 30 SpD
         - Thunder
         - Thunderbolt
         - Hidden Power [Bug]
@@ -298,6 +298,7 @@ public static readonly Pokemon Pachirisu6 = new()
         Level: 30
         EVs: 92 HP / 216 SpA / 200 Spe
         Timid Nature
+        IVs: 30 Def / 30 SpA / 30 SpD / 30 Spe
         - Thunderbolt
         - Hidden Power [Fighting]
         - Fake Tears
@@ -358,11 +359,12 @@ public static readonly Pokemon Pachirisu10 = new()
 {
     Showdown = 
         """
-        Pachirisu @ Focus Sash
+        Pachirisu (M) @ Focus Sash
         Ability: Pickup
         Level: 30
         EVs: 24 HP / 252 SpA / 36 SpD / 196 Spe
         Timid Nature
+        IVs: 30 Atk / 30 Def
         - Hidden Power [Ice]
         - Grass Knot
         - Super Fang
@@ -379,7 +381,7 @@ public static readonly Pokemon Pachirisu11 = new()
         Level: 30
         EVs: 200 HP / 40 Def / 252 SpA / 16 Spe
         Modest Nature
-        IVs: 3 Atk / 30 SpA / 30 SpD
+        IVs: 30 HP / 30 Atk / 30 Def / 30 SpD / 30 Spe
         - Thunder
         - Thunderbolt
         - Shock Wave
@@ -396,7 +398,7 @@ public static readonly Pokemon Pachirisu12 = new()
         Level: 30
         EVs: 28 Def / 240 SpA / 240 Spe
         Modest Nature
-        IVs: 2 Atk / 30 SpA / 30 Spe
+        IVs: 30 HP / 30 Atk / 30 SpA / 30 Spe
         - Thunder
         - Thunderbolt
         - Hidden Power [Fire]
@@ -411,9 +413,9 @@ public static readonly Pokemon Pachirisu13 = new()
         Pachirisu @ Focus Sash
         Ability: Pickup
         Level: 30
-        EVs: 40 HP / 252 SpA / 216 Spe
+        EVs: 40 Atk / 252 SpA / 216 Spe
         Naive Nature
-        IVs: 2 Atk / 30 SpA / 30 Spe
+        IVs: 27 HP / 30 Def / 30 SpA / 3 SpD / 30 Spe
         - Thunder
         - Hidden Power [Fire]
         - Bite
@@ -430,6 +432,7 @@ public static readonly Pokemon Pachirisu14 = new()
         Level: 30
         EVs: 24 HP / 56 Def / 252 SpA / 172 Spe
         Timid Nature
+        IVs: 30 Atk / 30 Def
         - Thunderbolt
         - Hidden Power [Ice]
         - Magnet Rise
@@ -446,6 +449,7 @@ public static readonly Pokemon Pachirisu15 = new()
         Level: 30
         EVs: 24 HP / 120 Def / 248 SpA / 76 SpD / 40 Spe
         Modest Nature
+        IVs: 30 Def / 30 SpA / 30 SpD / 30 Spe
         - Thunderbolt
         - Hidden Power [Fighting]
         - Grass Knot
@@ -462,6 +466,7 @@ public static readonly Pokemon Pachirisu16 = new()
         Level: 30
         EVs: 180 SpA / 144 SpD / 184 Spe
         Timid Nature
+        IVs: 30 Atk / 30 Def
         - Thunderbolt
         - Hidden Power [Ice]
         - Fake Tears
@@ -478,6 +483,7 @@ public static readonly Pokemon Pachirisu17 = new()
         Level: 30
         EVs: 12 HP / 240 SpA / 20 SpD / 236 Spe
         Modest Nature
+        IVs: 30 Atk / 30 SpA
         - Thunder
         - Thunderbolt
         - Hidden Power [Grass]
