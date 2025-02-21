@@ -11,7 +11,7 @@ public static readonly Pokemon CresseliaItoI6 = new()
         """
         Cresselia @ Leftovers
         Ability: Levitate
-        Level: 50
+        Level: 57
         EVs: 248 HP / 252 Def / 4 SpD / 4 Spe
         Bold Nature
         IVs: 30 HP / 1 Atk / 30 SpA
@@ -29,7 +29,7 @@ public static readonly Pokemon ArticunoItol6 = new()
         """
         Articuno @ Bright Powder
         Ability: Pressure
-        Level: 50
+        Level: 78
         EVs: 252 HP / 4 SpD / 252 Spe
         Timid Nature
         IVs: 2 Atk / 30 SpA
@@ -163,7 +163,7 @@ public static readonly Pokemon UxieMagpie = new()
         """
         Uxie
         Ability: Levitate
-        Level: 50
+        Level: 76
         EVs: 252 HP / 4 Def / 20 SpD / 228 Spe
         Timid Nature
         IVs: 0 Atk
