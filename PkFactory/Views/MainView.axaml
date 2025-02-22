@@ -93,15 +93,23 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
-        <StackPanel
-            Grid.Row="2"
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button HorizontalAlignment="Left" Command="{Binding ResetSetsCommand}">Reset Sets</Button>
+                <Button
+                    HorizontalAlignment="Left"
+                    Command="{Binding ValidateSetsCommand}"
+                    Content="Validate Sets" />
+            </StackPanel>
+            <StackPanel
             VerticalAlignment="Top"
             Orientation="Horizontal">
-            <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Optional: Add Existing Save to Modify</Button>
-            <Button
-                HorizontalAlignment="Left"
-                Command="{Binding SaveFileCommand}"
-                Content="Save" />
+                <Button HorizontalAlignment="Left" Command="{Binding GetFileCommand}">Optional: Add Existing Save to Modify</Button>
+                <Button
+                    HorizontalAlignment="Left"
+                    Command="{Binding SaveFileCommand}"
+                    Content="Save" />
+        </StackPanel>
         </StackPanel>
 
     </Grid>

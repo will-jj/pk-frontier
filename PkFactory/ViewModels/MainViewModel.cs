@@ -402,4 +402,18 @@ public partial class MainViewModel : ViewModelBase
             // Or just fix this method...
         }
     }
+
+    [RelayCommand]
+    public void ResetSets()
+    {
+        // TODO: Fix how all this is done
+        OnIncludeTeamChanged(IncludeTeam);
+    }
+
+    [RelayCommand]
+    public void ValidateSets()
+    {
+        if (_saveFile is null) return;
+        _ = ValidateAndGenerateTeams();
+    }
 }
