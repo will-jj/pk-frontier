@@ -46,10 +46,6 @@ public partial class MainViewModel : ViewModelBase
     {
         SelectedGender = GenderSelects[0];
         APILegality.SetAllLegalRibbons = false;
-        if(OperatingSystem.IsBrowser())
-        {
-            Message = "Auto legality corrections are currently not applied in the browser, all default Pokemon are however legal, any changes made may not be.";
-        }
     }
 
     [Required]
@@ -205,22 +201,17 @@ public partial class MainViewModel : ViewModelBase
         // Still show as traded but at least give the name
         pkm.OriginalTrainerName = Name;
 
-        // TODO: why this isn't working            
-        //#if !BROWSER
-        if (!OperatingSystem.IsBrowser())
-        {
-            // Make them legal
-            PKM pkmLegal =
-                _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
-            pkmLegal.RestoreIVs(pkm.IVs);
-            
-            // Why do you change swarm...
-            pkmLegal.Ability = pkm.Ability;
-            pkmLegal.ResetPartyStats();
-            pkm = pkmLegal.Clone();
-                
 
-        }
+        // Make them legal
+        PKM pkmLegal =
+            _saveFile.GetLegalFromTemplate(pkm, set, out LegalizationResult result, out ITracebackHandler _);
+        pkmLegal.RestoreIVs(pkm.IVs);
+        
+        // Why do you change swarm...
+        pkmLegal.Ability = pkm.Ability;
+        pkmLegal.ResetPartyStats();
+        pkm = pkmLegal.Clone();
+
 
         if (member.PID is not null)
             pkm.PID = (uint)member.PID;
