@@ -545,7 +545,38 @@ public static readonly Pokemon GarchompMagpie = new()
         """
 };
 
+public static readonly Pokemon BlisseyMagpie = new()
+{
+    Showdown =
+        """
+        Blissey  
+        Ability: Natural Cure  
+        Level: 50  
+        EVs: 12 HP / 252 Def / 244 Spe  
+        Bold Nature  
+        IVs: 0 Atk  
+        - Seismic Toss  
+        - Thunder Wave  
+        - Soft-Boiled  
+        - Aromatherapy
+        """
+};
 
+public static readonly Pokemon Garchomy2Magpie = new()
+{
+    Showdown =
+        """
+        Garchomp (M) 
+        Ability: Sand Veil  
+        Level: 50  
+        EVs: 252 Atk / 4 SpD / 252 Spe  
+        Jolly Nature  
+        - Earthquake  
+        - Outrage  
+        - Swords Dance  
+        - Substitute
+        """
+};
 
 
 public static readonly Team Itol6Team = new()
@@ -588,6 +619,15 @@ public static readonly Team MagpieArcadeSingles220Final = new()
     OriginalSource = null
 };
 
+// The Suicune from the Pokepast is slightly different but still ends up with the same stats
+public static readonly Team MagpieArcadeSingles315 = new()
+{
+    OT = "Magpie",
+    Tags = Tags.Arcade | Tags.Singles,
+    Members = [Garchomy2Magpie, SuicuneMagpie, BlisseyMagpie],
+    OriginalSource = "https://pokepast.es/51ec0ebfc6770b7d",
+};
+
 public static readonly Team TsitsoPachirisuHallTeam = new()
 {
     OT = "Tsitso",
@@ -607,6 +647,7 @@ public static readonly List<Team> AllSets =
     SquilliamsArcadeSingles,
     MagpieArcadeSingles220,
     MagpieArcadeSingles220Final,
+    MagpieArcadeSingles315,
     TsitsoPachirisuHallTeam,
 ];
 }
