@@ -303,7 +303,7 @@ public partial class MainViewModel : ViewModelBase
             // TODO: If loading saves check where to put them properly
             _saveFile.SetBoxSlotAtIndex(pkm, emptyBox, partyCount);
             partyCount++;
-            if (partyCount > _saveFile.GetBoxData(0).Length)
+            if (partyCount == _saveFile.GetBoxData(0).Length)
             {
                 partyCount = 0;
                 if (emptyBoxList.Count > 0)
