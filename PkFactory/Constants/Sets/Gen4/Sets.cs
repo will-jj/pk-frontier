@@ -582,6 +582,7 @@ public static readonly Pokemon Garchomy2Magpie = new()
 public static readonly Team Itol6Team = new()
 {
     OT = "Itol6",
+    Name = "Itol6",
     Tags = Tags.Arcade,
     Members = [CresseliaItoI6, ArticunoItol6, GarchompItol6],
     OriginalSource = "https://www.smogon.com/forums/threads/4th-generation-battle-facilities-discussion-and-records.3663294/page-3#post-8606917"
@@ -590,6 +591,7 @@ public static readonly Team Itol6Team = new()
 public static readonly Team TREArcardeSingles = new()
 {
     OT = "TRE",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Arcade | Tags.Singles,
     Members = [GarchompTRE, BlisseyTRE, GengarTRE],
     OriginalSource = null
@@ -598,6 +600,7 @@ public static readonly Team TREArcardeSingles = new()
 public static readonly Team SquilliamsArcadeSingles = new()
 {
     OT = "Squilliams",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Arcade | Tags.Singles,
     Members = [StarmieSquilliams, ScizorSquilliams, GarchompSquilliams],
     OriginalSource = null
@@ -606,6 +609,7 @@ public static readonly Team SquilliamsArcadeSingles = new()
 public static readonly Team MagpieArcadeSingles220 = new()
 {
     OT = "Magpie",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Arcade | Tags.Singles,
     Members = [UxieMagpie, DrapionMagpie, SalamenceMagpie],
     OriginalSource = null
@@ -614,6 +618,7 @@ public static readonly Team MagpieArcadeSingles220 = new()
 public static readonly Team MagpieArcadeSingles220Final = new()
 {
     OT = "Magpie",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Arcade | Tags.Singles,
     Members = [GarchompMagpie, ScizorMagpie, SuicuneMagpie],
     OriginalSource = null
@@ -623,6 +628,7 @@ public static readonly Team MagpieArcadeSingles220Final = new()
 public static readonly Team MagpieArcadeSingles315 = new()
 {
     OT = "Magpie",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Arcade | Tags.Singles,
     Members = [Garchomy2Magpie, SuicuneMagpie, BlisseyMagpie],
     OriginalSource = "https://pokepast.es/51ec0ebfc6770b7d",
@@ -631,6 +637,7 @@ public static readonly Team MagpieArcadeSingles315 = new()
 public static readonly Team TsitsoPachirisuHallTeam = new()
 {
     OT = "Tsitso",
+    Name = "Magpie Arcade Singles 315",
     Tags = Tags.Hall,
     Members =
     [

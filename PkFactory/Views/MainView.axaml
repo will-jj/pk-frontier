@@ -26,11 +26,6 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Vertical">
-            <StackPanel.Styles>
-                <Style Selector="TextBox.class1">
-                    <Setter Property="BorderBrush" Value="Red" />
-                </Style>
-            </StackPanel.Styles>
             <TextBlock
                 Margin="5"
                 HorizontalAlignment="Left"
@@ -65,6 +60,8 @@
                 <CheckBox Margin="5" IsChecked="{Binding IncludeTeam, Mode=TwoWay}">Include Teams</CheckBox>
                 <CheckBox Name="EditTeams" Margin="5">Edit Teams</CheckBox>
             </StackPanel>
+            <ComboBox Margin="5" IsVisible="{Binding #EditTeams.IsChecked}" SelectedIndex="{Binding SelectedTeamIndex}" ItemsSource="{Binding SetsNames}"></ComboBox>
+
         </StackPanel>
         <ScrollViewer
             Grid.Row="1"
@@ -72,7 +69,12 @@
             Margin="5"
             HorizontalAlignment="Center"
             IsVisible="{Binding #EditTeams.IsChecked}">
-            <ItemsControl IsVisible="{Binding IncludeTeam}" ItemsSource="{Binding Sets}">
+            <ScrollViewer.Styles>
+                <Style Selector="TextBox.class1">
+                    <Setter Property="BorderBrush" Value="Red" />
+                </Style>
+            </ScrollViewer.Styles>
+            <ItemsControl IsVisible="{Binding IncludeTeam}" ItemsSource="{Binding SelectedTeam.Sets}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

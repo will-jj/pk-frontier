@@ -5,6 +5,7 @@ namespace PkFactory.Models;
 public record Team()
 {
     public required string OT;
+    public required string Name;
     public string? Record;
     public string? RecordURL;
     /// <summary>

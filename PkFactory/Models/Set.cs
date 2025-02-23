@@ -6,13 +6,13 @@ namespace PkFactory.Models;
 public partial class Set : ViewModelBase
 {
     [ObservableProperty]
-    string _showdownText = string.Empty;
-
-    [ObservableProperty]
-    private bool _isNotValid;
+    public partial string ShowdownText { get; set; } = string.Empty;
     
     [ObservableProperty]
-    string _errors = string.Empty;
+    public partial bool IsNotValid { get; set; }
+    
+    [ObservableProperty]
+    public partial string Errors { get; set; } = string.Empty;
     
     public uint? PID { get; set; }
 

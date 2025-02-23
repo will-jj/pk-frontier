@@ -60,12 +60,19 @@ public partial class MainViewModel : ViewModelBase
 
     public ObservableCollection<string> Games { get; set; } = ["Emerald", "Heart Gold"];
     public ObservableCollection<string> GenderSelects { get; set; } = ["Boy", "Girl"];
-    public ObservableCollection<Set> Sets { get; set; } = new()
-    {
+    public ObservableCollection<Set> Sets { get; set; } =
+    [
         new(),
-        new(String.Empty),
-        new Set(String.Empty),
-    };
+        new(),
+        new()
+    ];
+
+
+
+    public ObservableCollection<ObservableTeam> Teams { get; set; } = [];
+    
+    public ObservableCollection<string> SetsNames { get; set; } = [];
+        
 
     [ObservableProperty]
     private string _selectedSet;
@@ -75,6 +82,12 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private bool _includeTeam;
+    
+    [ObservableProperty]
+    public partial ObservableTeam SelectedTeam { get; set; }
+    
+    [ObservableProperty]
+    public partial int SelectedTeamIndex { get; set; }
 
     [RelayCommand]
     public async Task GetPreppedFile(string asset)
@@ -223,35 +236,37 @@ public partial class MainViewModel : ViewModelBase
     {
         List<PKM> monsToAdd = new();
         if (_saveFile is null) return monsToAdd;
-        
-        foreach (Set member in Sets)
+        foreach (ObservableTeam team in Teams)
         {
-            ShowdownSet set = new(member.ShowdownText);
-            if (set.InvalidLines.Count > 0 || set.Species == 0)
+            foreach (Set member in team.Sets)
             {
-                member.Errors = string.Join('\n', set.InvalidLines);
-                member.IsNotValid = true;
-                continue;
+                ShowdownSet set = new(member.ShowdownText);
+                if (set.InvalidLines.Count > 0 || set.Species == 0)
+                {
+                    member.Errors = string.Join('\n', set.InvalidLines);
+                    member.IsNotValid = true;
+                    continue;
+                }
+
+                member.IsNotValid = false;
+
+                PKM? pkm = PokemonFromSet(member, set);
+                if(pkm is null) continue;
+
+                LegalityAnalysis la = new(pkm);
+
+                if (!la.Valid)
+                {
+
+                    string report = la.Report();
+                    member.Errors = report;
+                    member.IsNotValid = true;
+                    // redo the analysis just for ease...
+                    // allow for now
+                    //continue;
+                }
+                monsToAdd.Add(pkm);
             }
-
-            member.IsNotValid = false;
-
-           PKM? pkm = PokemonFromSet(member, set);
-           if(pkm is null) continue;
-
-            LegalityAnalysis la = new(pkm);
-
-            if (!la.Valid)
-            {
-
-                string report = la.Report();
-                member.Errors = report;
-                member.IsNotValid = true;
-                // redo the analysis just for ease...
-                // allow for now
-                //continue;
-            }
-            monsToAdd.Add(pkm);
         }
         
         return monsToAdd;
@@ -346,18 +361,34 @@ public partial class MainViewModel : ViewModelBase
 
     partial void OnIncludeTeamChanged(bool value)
     {
+        Sets.Clear();
+        Teams.Clear();
+        SetsNames.Clear();
+        
         if (value)
         {
-            Sets.Clear();
             if (_saveFile is null) return;
             if (_saveFile.Generation == 4)
             {
+                
                 foreach (Team team in Constants.Sets.Gen4.Sets4.AllSets)
                 {
+                    List<Set> members = new();
+                    foreach (Pokemon member in team.Members)
+                    {
+                        members.Add(new(member.Showdown, member.PID));
+                    }
+                    Teams.Add(new ObservableTeam(team.Name, members)); 
+                    
                     foreach (Pokemon member in team.Members)
                     {
                         Sets.Add(new(member.Showdown, member.PID));
                     }
+                }
+
+                foreach (var VARIABLE in Teams)
+                {
+                    SetsNames.Add((VARIABLE.TeamName));
                 }
             }
 
@@ -415,5 +446,10 @@ public partial class MainViewModel : ViewModelBase
     {
         if (_saveFile is null) return;
         _ = ValidateAndGenerateTeams();
+    }
+
+    partial void OnSelectedTeamIndexChanged(int value)
+    {
+        SelectedTeam = Teams[value];
     }
 }

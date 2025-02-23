@@ -64,6 +64,7 @@ public static class Sets3
     public static readonly Team AdededeTowerSingles50 = new()
     {
         OT = "Adedede",
+        Name = "Adedede",
         Tags = Tags.Tower | Tags.Singles,
         Members = [SkarmoryAdedede, BlisseyAdedede, LatiosAdedede],
         OriginalSource = "https://www.smogon.com/forums/threads/gen-iii-battle-frontier-discussion-and-records.3648697/"
