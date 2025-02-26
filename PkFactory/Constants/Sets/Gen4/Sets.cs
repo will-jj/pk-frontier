@@ -369,7 +369,7 @@ public static readonly Pokemon Pachirisu10 = new()
         IVs: 30 Atk / 30 Def
         - Hidden Power [Ice]
         - Grass Knot
-        - Super Fang
+        - Fake Tears
         - Magnet Rise
         """,
 };
