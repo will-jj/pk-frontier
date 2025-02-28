@@ -381,12 +381,12 @@ public static readonly Pokemon Pachirisu11 = new()
         Pachirisu @ Choice Specs
         Ability: Run Away
         Level: 30
-        EVs: 200 HP / 40 Def / 252 SpA / 16 Spe
+        EVs: 240 HP / 252 SpA / 16 Spe
         Modest Nature
-        IVs: 30 HP / 30 Atk / 30 Def / 30 SpD / 30 Spe
+        IVs: 30 HP / 30 Atk / 30 Def / 28 SpD / 30 Spe
         - Thunder
         - Thunderbolt
-        - Shock Wave
+        - Fling
         - Hidden Power [Ground]
         """,
 };
