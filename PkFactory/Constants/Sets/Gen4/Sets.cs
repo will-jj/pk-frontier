@@ -351,7 +351,7 @@ public static readonly Pokemon Pachirisu9 = new()
         EVs: 20 HP / 252 Atk / 236 Spe
         Adamant Nature
         - Dig
-        - Super Fang
+        - Bite
         - Bide
         - Rain Dance
         """,
