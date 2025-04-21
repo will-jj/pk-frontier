@@ -295,15 +295,15 @@ public static readonly Pokemon Pachirisu6 = new()
 {
     Showdown = 
         """
-        Pachirisu @ Expert Belt
+        Pachirisu @ Lum Berry
         Ability: Run Away
         Level: 30
-        EVs: 92 HP / 216 SpA / 200 Spe
-        Timid Nature
-        IVs: 30 Def / 30 SpA / 30 SpD / 30 Spe
+        EVs: 12 HP / 52 Def / 240 SpA / 200 Spe
+        Modest Nature
+        IVs: 30 Atk / 30 SpA / 30 Spe
         - Thunderbolt
-        - Hidden Power [Fighting]
-        - Fake Tears
+        - Hidden Power Fire
+        - Grass Knot
         - Substitute
         """,
 };
@@ -364,10 +364,10 @@ public static readonly Pokemon Pachirisu10 = new()
         Pachirisu (M) @ Focus Sash
         Ability: Run Away
         Level: 30
-        EVs: 24 HP / 252 SpA / 36 SpD / 196 Spe
+        EVs: 252 SpA / 252Spe
         Timid Nature
         IVs: 30 Atk / 30 Def
-        - Hidden Power [Ice]
+        - Hidden Power Ice
         - Grass Knot
         - Fake Tears
         - Magnet Rise
@@ -395,7 +395,7 @@ public static readonly Pokemon Pachirisu12 = new()
 {
     Showdown = 
         """
-        Pachirisu @ Focus Sash
+        Pachirisu @ Jacoba Berry
         Ability: Run Away
         Level: 30
         EVs: 28 Def / 240 SpA / 240 Spe
@@ -412,16 +412,16 @@ public static readonly Pokemon Pachirisu13 = new()
 {
     Showdown = 
         """
-        Pachirisu @ Focus Sash
+        Pachirisu @ Expert Belt
         Ability: Run Away
         Level: 30
-        EVs: 40 Atk / 252 SpA / 216 Spe
-        Naive Nature
-        IVs: 27 HP / 30 Def / 30 SpA / 3 SpD / 30 Spe
-        - Thunder
-        - Hidden Power [Fire]
-        - Bite
-        - Grass Knot
+        EVs: 20 HP / 40 Def / 252 SpA / 196 Spe
+        Modest Nature
+        IVs: 30 Atk / 30 Def / 30 SpD
+        - Thunderbolt
+        - Hidden Power Bug
+        - Fake Tears
+        - Substitute
         """,
 };
 
