@@ -364,7 +364,7 @@ public static readonly Pokemon Pachirisu10 = new()
         Pachirisu (M) @ Focus Sash
         Ability: Run Away
         Level: 30
-        EVs: 252 SpA / 252Spe
+        EVs: 252 SpA / 252 Spe
         Timid Nature
         IVs: 30 Atk / 30 Def
         - Hidden Power Ice
@@ -395,7 +395,7 @@ public static readonly Pokemon Pachirisu12 = new()
 {
     Showdown = 
         """
-        Pachirisu @ Jacoba Berry
+        Pachirisu @ Jaboca Berry
         Ability: Run Away
         Level: 30
         EVs: 28 Def / 240 SpA / 240 Spe
