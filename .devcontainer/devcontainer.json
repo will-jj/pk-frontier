@@ -3,14 +3,6 @@
   // Uses the official .NET devcontainer image — change the version tag as needed
   "image": "mcr.microsoft.com/devcontainers/dotnet:1-9.0",
 
-  // Features to add to the dev container
-  "features": {
-    "ghcr.io/devcontainers/features/dotnet:1": {},
-    "ghcr.io/devcontainers/features/python:1": {
-      "installTools": true
-    }
-  },
-
 
   "postCreateCommand": "dotnet restore && dotnet tool restore",
 
@@ -19,7 +11,7 @@
     "vscode": {
       "extensions": [
         "ms-dotnettools.csharp",
-        "ms-dotnettools.csdevkit",
+        "ms-dotnettools.csdevkit"
       ]
     }
   }
